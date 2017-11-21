@@ -94,7 +94,7 @@ public class ZipUtils {
 	    }  
 	}
 	public static void main(String args[]) throws Exception {
-		ZipUtils.unzip("D:\\MESSAGE.zip", "D:\\MESSAGE");
+		ZipUtils.unzip("D:\\MESSAGE.zip", "D:\\");
 
 //		List<String> list = readZipFile("D:\\MESSAGE.zip");
 //		for (int i = 0; i < list.size(); i++) {
