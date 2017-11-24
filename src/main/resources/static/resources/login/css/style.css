@@ -1,0 +1,39 @@
+@charset "utf-8";
+/*======黄页后台首页展示=========*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: "微软雅黑";
+}
+.wrap {
+    width: 750px;
+    height: 460px;
+    margin: 80px auto 0;
+    position: relative;
+}
+.wrap h1 {
+    /* padding-left: 40px; */
+    height: 40px;
+}
+.wrap h1 img {
+    height: 100%;
+}
+.wrap h2 {
+    font-size: 20px;
+ /*    padding-left: 40px; */
+    color: #177fba;
+    height: 30px;
+    line-height: 30px;
+    font-weight: normal;
+}
+.wrap p {
+    width: 100%;
+    text-align: center;
+    height: auto;
+}
+.wrap p img {
+    width: 100%;
+    height: auto;
+}
