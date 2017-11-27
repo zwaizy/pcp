@@ -73,8 +73,12 @@ public class UsersDaoImpl extends JdbcDaoImpl implements UsersDao {
 				return roncooUser;
 			}
 		}, id);*/
-		
-		return queryForObject(sql, Users.class, name);
+		try {
+			return queryForObject(sql, Users.class, name);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 	
 	@Override

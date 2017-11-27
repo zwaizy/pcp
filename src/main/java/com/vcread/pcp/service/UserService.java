@@ -1,5 +1,6 @@
 package com.vcread.pcp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,25 +48,27 @@ public class UserService {
 		}
 		
 		boolean flag = false;
+		List<Integer> roleList = new ArrayList<Integer>();
 		//判断权限
 		List<UserRole> list = this.userRoleDao.listByUserCode(username);
 		if(CollectionUtils.isNotEmpty(list)){
 			for (UserRole userRole : list) {
-				if(userRole.getRoleId() == 7 || userRole.getRoleId() == 8){
-					flag = true;
-					break;
-				}
+				roleList.add(userRole.getRoleId());
+//				if(userRole.getRoleId() == 7 || userRole.getRoleId() == 8){
+//					flag = true;
+//					break;
+//				}
 			}
 		}
-		if(!flag){
+		
+		if(!roleList.contains(7) && !roleList.contains(8)){
 			return ResultGenerator.genFailResult("没有权限访问");//目前仅支持角色id为7,8的角色访问
 		}
 		
 		request.getSession().setAttribute(WebSecurityConfig.SESSION_KEY, username);
-		
-		return ResultGenerator.genSuccessResult();
+		request.getSession().setAttribute(WebSecurityConfig.SESSION_ROLE, roleList);
+
+		return ResultGenerator.genSuccessResult(roleList.contains(8) ? true : false);
 	}
-	
-	
 
 }
