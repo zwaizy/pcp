@@ -52,6 +52,7 @@ public class UserService {
 		if(CollectionUtils.isNotEmpty(list)){
 			for (UserRole userRole : list) {
 				if(userRole.getRoleId() == 7 || userRole.getRoleId() == 8){
+					request.getSession().setAttribute(WebSecurityConfig.SESSION_ROLE, userRole.getRoleId());
 					flag = true;
 					break;
 				}
@@ -60,9 +61,8 @@ public class UserService {
 		if(!flag){
 			return ResultGenerator.genFailResult("没有权限访问");//目前仅支持角色id为7,8的角色访问
 		}
-		
+
 		request.getSession().setAttribute(WebSecurityConfig.SESSION_KEY, username);
-		
 		return ResultGenerator.genSuccessResult();
 	}
 	
