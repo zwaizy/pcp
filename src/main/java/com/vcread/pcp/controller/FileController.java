@@ -3,11 +3,13 @@
  */
 package com.vcread.pcp.controller;
 
+import com.vcread.pcp.configure.WebSecurityConfig;
 import com.vcread.pcp.entity.FrameDepartment;
 import com.vcread.pcp.entity.UserDept;
 import com.vcread.pcp.service.FrameDepartmentService;
 import com.vcread.pcp.service.UserDeptService;
 import com.vcread.pcp.util.zip.ZipUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -93,7 +96,7 @@ public class FileController {
     @ResponseBody
     public Map<String,Object> show (String fileName,HttpServletRequest request){
 		Map<String,Object> resultMap=new HashMap<String,Object>();
-        int role=Integer.parseInt(request.getSession().getAttribute("role").toString());
+        boolean role = (boolean) request.getSession().getAttribute(WebSecurityConfig.SESSION_ROLE);
         String userName=request.getSession().getAttribute("user").toString();
         String deptName="";
         List<String> myList =new ArrayList<String>();
@@ -103,22 +106,21 @@ public class FileController {
         }
         File f = new File(path);
         String[] childs = f.list();
-        if(role == 7){
-            FrameDepartment frameDepartment=new FrameDepartment();
-            UserDept userDept=userDeptService.getUserDept(userName);
-            String dept_code=userDept.getUser_code().toString();
-            String fram_code=userDept.getFram_code().toString();
-            frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
-            deptName= frameDepartment.getDept_name();
-            for(int i=0; i<childs.length; i++) {
-                if(deptName.equals(childs[i])){
-                    myList.add(childs[i]);
-                    break;
-                }
-            }
-        }else{
+        if(role){
             Collections.addAll(myList, childs);
-
+        }else{
+        	FrameDepartment frameDepartment=new FrameDepartment();
+        	UserDept userDept=userDeptService.getUserDept(userName);
+        	String dept_code=userDept.getUser_code().toString();
+        	String fram_code=userDept.getFram_code().toString();
+        	frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
+        	deptName= frameDepartment.getDept_name();
+        	for(int i=0; i<childs.length; i++) {
+        		if(deptName.equals(childs[i])){
+        			myList.add(childs[i]);
+        			break;
+        		}
+        	}
         }
         resultMap.put("myList",myList);
         resultMap.put("filePath",path);
