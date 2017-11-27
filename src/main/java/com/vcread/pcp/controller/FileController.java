@@ -103,24 +103,28 @@ public class FileController {
         String path="E://dianxin";
         if(!StringUtils.isEmpty(fileName)){
             path=path+"/"+fileName;
-        }
-        File f = new File(path);
-        String[] childs = f.list();
-        if(role){
-            Collections.addAll(myList, childs);
+            File f = new File(path);
+            String[] childs = f.list();
+            if(role){
+                Collections.addAll(myList, childs);
+            }else{
+                FrameDepartment frameDepartment=new FrameDepartment();
+                UserDept userDept=userDeptService.getUserDept(userName);
+                String dept_code=userDept.getUser_code().toString();
+                String fram_code=userDept.getFram_code().toString();
+                frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
+                deptName= frameDepartment.getDept_name();
+                for(int i=0; i<childs.length; i++) {
+                    if(deptName.equals(childs[i])){
+                        myList.add(childs[i]);
+                        break;
+                    }
+                }
+            }
         }else{
-        	FrameDepartment frameDepartment=new FrameDepartment();
-        	UserDept userDept=userDeptService.getUserDept(userName);
-        	String dept_code=userDept.getUser_code().toString();
-        	String fram_code=userDept.getFram_code().toString();
-        	frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
-        	deptName= frameDepartment.getDept_name();
-        	for(int i=0; i<childs.length; i++) {
-        		if(deptName.equals(childs[i])){
-        			myList.add(childs[i]);
-        			break;
-        		}
-        	}
+            File f = new File(path);
+            String[] childs = f.list();
+            Collections.addAll(myList, childs);
         }
         resultMap.put("myList",myList);
         resultMap.put("filePath",path);
