@@ -3,18 +3,25 @@
  */
 package com.vcread.pcp.controller;
 
+import com.vcread.pcp.entity.FrameDepartment;
+import com.vcread.pcp.entity.UserDept;
+import com.vcread.pcp.service.FrameDepartmentService;
+import com.vcread.pcp.service.UserDeptService;
 import com.vcread.pcp.util.zip.ZipUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * spring-boot-demo-12-1
@@ -28,7 +35,11 @@ public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
 	private static final String SUFFIEX = ".zip";
+    @Autowired
+    private UserDeptService userDeptService;
 
+    @Autowired
+    private FrameDepartmentService frameDepartmentService;
 	@RequestMapping(value = "upload")
 	@ResponseBody
 	public String upload(@RequestParam("roncooFile") MultipartFile file) {
@@ -70,5 +81,48 @@ public class FileController {
 
 		return "上传失败";
 	}
+
+
+    /**
+     * 文件列表
+     * @param fileName
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "show")
+    @ResponseBody
+    public Map<String,Object> show (String fileName,HttpServletRequest request){
+		Map<String,Object> resultMap=new HashMap<String,Object>();
+        int role=Integer.parseInt(request.getSession().getAttribute("role").toString());
+        String userName=request.getSession().getAttribute("user").toString();
+        String deptName="";
+        List<String> myList =new ArrayList<String>();
+        String path="E://dianxin";
+        if(!StringUtils.isEmpty(fileName)){
+            path=path+"/"+fileName;
+        }
+        File f = new File(path);
+        String[] childs = f.list();
+        if(role == 7){
+            FrameDepartment frameDepartment=new FrameDepartment();
+            UserDept userDept=userDeptService.getUserDept(userName);
+            String dept_code=userDept.getUser_code().toString();
+            String fram_code=userDept.getFram_code().toString();
+            frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
+            deptName= frameDepartment.getDept_name();
+            for(int i=0; i<childs.length; i++) {
+                if(deptName.equals(childs[i])){
+                    myList.add(childs[i]);
+                    break;
+                }
+            }
+        }else{
+            Collections.addAll(myList, childs);
+
+        }
+        resultMap.put("myList",myList);
+        resultMap.put("filePath",path);
+        return resultMap;
+    }
 
 }
