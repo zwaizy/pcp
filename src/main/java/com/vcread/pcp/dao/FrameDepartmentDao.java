@@ -1,6 +1,7 @@
 package com.vcread.pcp.dao;
 import com.vcread.pcp.entity.FrameDepartment;
 import com.vcread.pcp.util.base.Page;
+
 import java.util.Map;
 
 /**
@@ -21,6 +22,6 @@ public interface FrameDepartmentDao {
 	FrameDepartment selectByDepartmentName(String deptCode,String framCode);
 
 
-	public Page<Map<String, Object>> selectByPage(Map<String,Object> param);
+	public Page<FrameDepartment> selectByPage(int pageCurrent, int pageSize);
 
 }

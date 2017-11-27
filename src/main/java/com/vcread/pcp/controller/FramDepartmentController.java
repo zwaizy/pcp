@@ -3,45 +3,50 @@
  */
 package com.vcread.pcp.controller;
 
-import com.vcread.pcp.configure.WebSecurityConfig;
-import com.vcread.pcp.service.FrameDepartmentService;
-import com.vcread.pcp.util.base.Page;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.vcread.pcp.configure.WebSecurityConfig;
+import com.vcread.pcp.entity.FrameDepartment;
+import com.vcread.pcp.entity.UserDept;
+import com.vcread.pcp.result.Result;
+import com.vcread.pcp.result.ResultGenerator;
+import com.vcread.pcp.service.FrameDepartmentService;
+import com.vcread.pcp.service.UserDeptService;
+import com.vcread.pcp.util.base.Page;
 
 /**
  *
  * @author xyy
  */
 @Controller
-@RequestMapping
+@RequestMapping("/frameDepartment")
 public class FramDepartmentController {
 
 	@Autowired
 	private FrameDepartmentService frameDepartmentService;
+	@Autowired
+	private UserDeptService userDeptService;
 
 	@RequestMapping(value = "/get")
 	@ResponseBody
-	public Map<String, Object> get(@RequestParam Map<String,Object> param, HttpServletRequest request) {
-		Map<String, Object> resultMap = new HashMap<String,Object>();
-		int role=Integer.parseInt(request.getSession().getAttribute("role").toString());
-		String userName=request.getSession().getAttribute("user").toString();
-		Page<Map<String,Object>> framList=new Page<Map<String, Object>>();
-		if(role == 7){
+	public Result get(int pageCurrent, int pageSize, HttpServletRequest request) {
+		boolean role= (boolean) request.getSession().getAttribute(WebSecurityConfig.SESSION_ROLE);
+		String userName = (String) request.getSession().getAttribute(WebSecurityConfig.SESSION_KEY);
+		if(role){
+			Page<FrameDepartment> framList = frameDepartmentService.getFramList(pageCurrent,pageSize);
+			return ResultGenerator.genSuccessResult(framList);
 		}else{
-			framList=frameDepartmentService.getFramList(param);
+			UserDept userDept=userDeptService.getUserDept(userName);
+			FrameDepartment frameDepartment = frameDepartmentService.getFrameDepartment(userDept.getUser_code(),userDept.getFram_code());
+			return ResultGenerator.genSuccessResult(frameDepartment);
 		}
-		resultMap.put("framList", "framList");
-		//resultMap.put("name", name);
-		return resultMap;
 	}
-
 }
