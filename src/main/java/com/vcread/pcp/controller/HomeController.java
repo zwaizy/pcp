@@ -41,7 +41,7 @@ public class HomeController {
   			return result;
   		} catch (Exception e) {	
   			e.printStackTrace();
-  			return ResultGenerator.genFailResult("登录错误");
+  			return ResultGenerator.genFailResult("登录失败");
   		}
   	}
 
