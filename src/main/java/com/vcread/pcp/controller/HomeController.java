@@ -32,15 +32,17 @@ public class HomeController {
     
     //接收表单，包含用户名和密码
   	@RequestMapping(value="/loginPost",method=RequestMethod.POST)
-  	@ResponseBody
-  	public Result userLogin(String username,String password,String captcha,
+  	public String userLogin(String username,String password,String captcha,
   			HttpServletRequest  request,HttpServletResponse response){
   		try {
   			Result result = userService.userLogin(username, password,captcha,request,response);
-  			return result;
+  			if((boolean)result.getData()){
+  				return "redirect:/admin";
+  			}
+  			return "redirect:/user";
   		} catch (Exception e) {	
   			e.printStackTrace();
-  			return ResultGenerator.genFailResult("登录失败");
+  			return "redirect:/login";
   		}
   	}
   	
