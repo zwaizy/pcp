@@ -20,23 +20,25 @@
     </header>
     <div class="click">单点登录</div>
     <div class="login">
-        <form action="">
+        <form >
             <p>
                 <span>用户名 ：</span>
                 <input  name = "username" type="text" value="" placeholder="请输入用户名"/>
             </p>
             <p>
                 <span>密码 ：</span>
-                <input name = "password" type="text" value="" placeholder="请输入密码"/>
+                <input name = "password" type="password" value="" placeholder="请输入密码"/>
             </p>
             <p class="code">
                 <span>验证码 ：</span>
-                <input  name = "code" type="text" value="" placeholder="" />
-                <img id="num" src="/images/kaptcha.jpg" />
+                <input  name = "captcha" type="text" value="" placeholder="" />
+                <img id="num" src="" />
                 <span class="shua">刷新验证码</span>
             </p>
+            <p class="error"></p>
             <p>
-                <input type="submit" value="登录" class="btn" />
+                <input type="button" value="登录" class="btn" />
+                <!--<button class="btn">登录1</button>-->
                 <span class="changepwd">修改密码</span>
             </p>
 
@@ -45,4 +47,7 @@
     </div>
     <footer> Copyright @ 中电信集团 版权所有</footer>
 </body>
+<script src="modulejs/jquery-2.1.4.js"></script>
+<script src="modulejs/jquery.md5.js"></script>
+<script src="modulejs/login.js"></script>
 </html>
