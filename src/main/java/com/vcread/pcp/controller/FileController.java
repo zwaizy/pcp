@@ -84,6 +84,7 @@ public class FileController {
 			file.transferTo(dest);
 			if (suffixName.equals(SUFFIEX)) {
 				ZipUtils.unzip(filePath + fileName,filePath);
+				dest.deleteOnExit();
 			}
 			return ResultGenerator.genSuccessResult();
 		} catch (IllegalStateException e) {
@@ -156,12 +157,12 @@ public class FileController {
         // 文件路径
         File targetFile = new File(path, fileName);
         if (targetFile.exists()) {
-        boolean bool=targetFile.delete();
-        if(bool){
-            return  ResultGenerator.genSuccessResult();
-            } else {
-            return  ResultGenerator.genFailResult("文件删除失败！");
-            }
+	        boolean bool=targetFile.delete();
+	        if(bool){
+	            return  ResultGenerator.genSuccessResult();
+	        } else {
+	            return  ResultGenerator.genFailResult("文件删除失败！");
+	        }
         }
         return  ResultGenerator.genFailResult("文件不存在！");
     }
