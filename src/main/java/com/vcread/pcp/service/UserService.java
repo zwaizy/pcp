@@ -37,6 +37,8 @@ public class UserService {
 			return ResultGenerator.genFailResult("验证码不正确，请重新输入");
 		}
 		
+		request.getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);
+		
 		Users user = usersDao.selectByName(username);
 		// 如果没有该用户名
 		if (null == user) {
