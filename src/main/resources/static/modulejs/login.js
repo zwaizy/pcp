@@ -6,12 +6,12 @@ $(function(){
     $('.shua').on('click', function () {
         $("#num").attr('src', codeUrl+'?'+Math.random());
     })
+    //canshu
+    var user = $('.login input[name="username"]').val().trim(); // 用户名
+    var pwd = $('.login input[name="password"]').val().trim(); // 密码
+    var code = $('.login input[name="captcha"]').val().trim(); // 验证码
     // 点击登录按钮时进行判断
     $('.btn').on('click', function () {
-        var user = $('.login input[name="username"]').val().trim(); // 用户名
-        var pwd = $('.login input[name="password"]').val().trim(); // 密码
-        var code = $('.login input[name="captcha"]').val().trim(); // 验证码
-
         if (user == '') {
             $('.login .error').show().html('请输入账号');
             return false;
@@ -28,26 +28,9 @@ $(function(){
             $('.login .error').show().html('请输入验证码');
             return false;
         } else {
+            var password = $.md5(pwd) ;
+            $('.login input[name="password"]').val(password) ;
             $('.login form').submit();
-//            var password = $.md5(pwd)
-//            $.ajax({
-//                type: 'POST',
-//                url: url_login,
-//                dataType: 'json',
-//                data: {
-//                    'username': user,
-//                    'password': password,
-//                    'captcha': code
-//                },
-//                success: function (data) {
-//                    if (data.code == 200) {
-//
-//                    } else {
-//                        $('.login .error').show().html(data.message);
-//                        return false;
-//                    }
-//                }
-//            })
         }
     })
 })
