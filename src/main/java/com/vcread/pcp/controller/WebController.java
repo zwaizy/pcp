@@ -35,7 +35,17 @@ public class WebController {
 		map.put("title", " wo hello word");
 		return "index"; // 开头不要加上/，linux下面会出错
 	}
+	
+	@RequestMapping(value = "/user")
+	public String toUser() {
+		return "user"; // 开头不要加上/，linux下面会出错
+	}
 
+	@RequestMapping(value = "/admin")
+	public String toAdmin() {
+		return "admin"; // 开头不要加上/，linux下面会出错
+	}
+	
 	@RequestMapping(value = "/login")
 	public String login() {
 		return "login"; // 开头不要加上/，linux下面会出错
