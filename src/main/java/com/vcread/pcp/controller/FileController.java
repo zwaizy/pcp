@@ -3,6 +3,7 @@
  */
 package com.vcread.pcp.controller;
 
+<<<<<<< Updated upstream
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import com.vcread.pcp.configure.WebSecurityConfig;
+import com.vcread.pcp.entity.FrameDepartment;
+import com.vcread.pcp.entity.UserDept;
+import com.vcread.pcp.result.Result;
+import com.vcread.pcp.result.ResultGenerator;
+import com.vcread.pcp.service.FrameDepartmentService;
+import com.vcread.pcp.service.UserDeptService;
+import com.vcread.pcp.util.zip.ZipUtils;
+>>>>>>> Stashed changes
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -151,4 +162,25 @@ public class FileController {
         return ResultGenerator.genSuccessResult(fileDTO);
     }
 
+    /**
+     * 删除文件
+     * @param path
+     * @param fileName
+     * @return
+     */
+    @RequestMapping(value = "delFile")
+    @ResponseBody
+    public Result delFile(String path, String fileName) {
+        // 文件路径
+        File targetFile = new File(path, fileName);
+        if (targetFile.exists()) {
+        boolean bool=targetFile.delete();
+        if(bool){
+            return  ResultGenerator.genSuccessResult();
+            } else {
+            return  ResultGenerator.genFailResult("文件删除失败！");
+            }
+        }
+        return  ResultGenerator.genFailResult("文件不存在！");
+    }
 }
