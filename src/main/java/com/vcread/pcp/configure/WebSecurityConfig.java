@@ -25,7 +25,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
 	@Value("${sp.excelsPath}")
-	private String excelsPath;
+	public String excelsPath;
 
 	/**
 	 * 登录session key

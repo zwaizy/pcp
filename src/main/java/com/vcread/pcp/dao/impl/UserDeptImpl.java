@@ -7,6 +7,7 @@ import com.vcread.pcp.entity.Users;
 import com.vcread.pcp.util.base.JdbcDaoImpl;
 import com.vcread.pcp.util.base.Page;
 import com.vcread.pcp.util.base.Sql;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -26,6 +27,18 @@ public class UserDeptImpl extends JdbcDaoImpl implements UserDeptDao {
 	public UserDept selectByName(String name) {
 		String sql = "select * from user_dept where user_code =?";
 		return queryForObject(sql, UserDept.class, name);
+	}
+
+	@Override
+	public UserDept selectByFramCode(String framCode) {
+		String sql = "select * from user_dept where fram_code =?";
+		try {
+			return queryForObject(sql, UserDept.class, framCode);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 	
 

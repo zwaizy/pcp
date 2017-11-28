@@ -44,6 +44,19 @@ public class HomeController {
   			return ResultGenerator.genFailResult("登录失败");
   		}
   	}
+  	
+  	//接收表单，包含用户名和密码
+//  	@RequestMapping(value="/logout",method=RequestMethod.GET)
+//  	@ResponseBody
+//  	public Result logout(HttpServletRequest  request,HttpServletResponse response){
+//  		try {
+//  			Result result = userService.logout(request,response);
+//  			return result;
+//  		} catch (Exception e) {	
+//  			e.printStackTrace();
+//  			return ResultGenerator.genFailResult("登出失败");
+//  		}
+//  	}
 
     @RequestMapping("/403")
     public String unauthorizedRole(){

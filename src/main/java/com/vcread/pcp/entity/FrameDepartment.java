@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class FrameDepartment implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3405720790799694259L;
+
 	private String dept_code;
 
 	/**
@@ -19,7 +24,7 @@ public class FrameDepartment implements Serializable {
 	/**
 	 *状态
 	 */
-	private String dept_status;//1 正常
+	private int dept_status;//1 正常
 
 	private String para_seq;
 
@@ -70,6 +75,18 @@ public class FrameDepartment implements Serializable {
 	private String linkman;
 
 	private String address;
+	
+	private String user_name ;
+	
+	
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 	public String getDept_code() {
 		return dept_code;
@@ -83,9 +100,7 @@ public class FrameDepartment implements Serializable {
 		return dept_name;
 	}
 
-	public String getDept_status() {
-		return dept_status;
-	}
+	 
 
 	public String getPara_seq() {
 		return para_seq;
@@ -198,8 +213,13 @@ public class FrameDepartment implements Serializable {
 	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
+ 
 
-	public void setDept_status(String dept_status) {
+	public int getDept_status() {
+		return dept_status;
+	}
+
+	public void setDept_status(int dept_status) {
 		this.dept_status = dept_status;
 	}
 

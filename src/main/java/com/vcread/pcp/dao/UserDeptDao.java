@@ -18,4 +18,6 @@ public interface UserDeptDao {
 	 */
 	UserDept selectByName(String name);
 
+	UserDept selectByFramCode(String framCode);
+
 }

@@ -1,10 +1,12 @@
 package com.vcread.pcp.service;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vcread.pcp.dao.FrameDepartmentDao;
 import com.vcread.pcp.entity.FrameDepartment;
-import com.vcread.pcp.util.base.Page;
 
 @Service
 public class FrameDepartmentService {
@@ -16,8 +18,8 @@ public class FrameDepartmentService {
 		return frameDepartmentDao.selectByDepartmentName(deptCode,framCode);
 	}
 
-	public Page<FrameDepartment> getFramList(Integer pageCurrent, Integer pageSize){
-		return frameDepartmentDao.selectByPage(pageCurrent,pageSize);
+	public List<Map<String,Object>> getFramList(){
+		return frameDepartmentDao.findAll();
 	}
 
 

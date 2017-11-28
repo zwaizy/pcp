@@ -72,4 +72,9 @@ public class UserService {
 		return ResultGenerator.genSuccessResult(flag);
 	}
 
+	public Result logout(HttpServletRequest request,HttpServletResponse response) {
+		request.getSession().invalidate();
+		return ResultGenerator.genSuccessResult();
+	}
+
 }

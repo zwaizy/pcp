@@ -3,16 +3,22 @@
  */
 package com.vcread.pcp.controller;
 
-import com.vcread.pcp.configure.WebSecurityConfig;
-import com.vcread.pcp.entity.FrameDepartment;
-import com.vcread.pcp.entity.UserDept;
-import com.vcread.pcp.service.FrameDepartmentService;
-import com.vcread.pcp.service.UserDeptService;
-import com.vcread.pcp.util.zip.ZipUtils;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +26,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import com.vcread.pcp.configure.WebSecurityConfig;
+import com.vcread.pcp.dto.FileDTO;
+import com.vcread.pcp.entity.FrameDepartment;
+import com.vcread.pcp.entity.UserDept;
+import com.vcread.pcp.result.Result;
+import com.vcread.pcp.result.ResultGenerator;
+import com.vcread.pcp.service.FrameDepartmentService;
+import com.vcread.pcp.service.UserDeptService;
+import com.vcread.pcp.util.zip.ZipUtils;
 
 /**
  * spring-boot-demo-12-1
@@ -36,8 +46,15 @@ import java.util.*;
 public class FileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+	
+
+	@Value("${sp.excelsPath}")
+	public String excelsPath;
 
 	private static final String SUFFIEX = ".zip";
+	
+	private static final String PATH = "/files/";
+	
     @Autowired
     private UserDeptService userDeptService;
 
@@ -45,9 +62,9 @@ public class FileController {
     private FrameDepartmentService frameDepartmentService;
 	@RequestMapping(value = "upload")
 	@ResponseBody
-	public String upload(@RequestParam("roncooFile") MultipartFile file) {
+	public Result upload(@RequestParam("file") MultipartFile file) {
 		if (file.isEmpty()) {
-			return "文件为空";
+			return ResultGenerator.genFailResult("文件为空");
 		}
 
 		// 获取文件名
@@ -59,7 +76,7 @@ public class FileController {
 		logger.info("上传的后缀名为：" + suffixName);
 
 		// 文件上传路径
-		String filePath = "d:/roncoo/";
+		String filePath = excelsPath;
 
 		// 解决中文问题，liunx下中文路径，图片显示问题
 //		fileName = UUID.randomUUID() + suffixName;
@@ -75,14 +92,14 @@ public class FileController {
 			if (suffixName.equals(SUFFIEX)) {
 				ZipUtils.unzip(filePath + fileName,filePath);
 			}
-			return "上传成功";
+			return ResultGenerator.genSuccessResult();
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return "上传失败";
+		return ResultGenerator.genFailResult("上传失败");
 	}
 
 
@@ -94,41 +111,44 @@ public class FileController {
      */
     @RequestMapping(value = "show")
     @ResponseBody
-    public Map<String,Object> show (String fileName,HttpServletRequest request){
-		Map<String,Object> resultMap=new HashMap<String,Object>();
+    public Result show (String fileName,HttpServletRequest request){
         boolean role = (boolean) request.getSession().getAttribute(WebSecurityConfig.SESSION_ROLE);
-        String userName=request.getSession().getAttribute("user").toString();
+        String userName=request.getSession().getAttribute(WebSecurityConfig.SESSION_KEY).toString();
         String deptName="";
-        List<String> myList =new ArrayList<String>();
-        String path="E://dianxin";
+        FileDTO fileDTO = new FileDTO();
+        String path = excelsPath;
         if(!StringUtils.isEmpty(fileName)){
-            path=path+"/"+fileName;
+            path=path+fileName;
             File f = new File(path);
             String[] childs = f.list();
             if(role){
-                Collections.addAll(myList, childs);
+            	fileDTO.setFileName(Arrays.asList(childs));
             }else{
-                FrameDepartment frameDepartment=new FrameDepartment();
                 UserDept userDept=userDeptService.getUserDept(userName);
                 String dept_code=userDept.getUser_code().toString();
                 String fram_code=userDept.getFram_code().toString();
-                frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
-                deptName= frameDepartment.getDept_name();
-                for(int i=0; i<childs.length; i++) {
-                    if(deptName.equals(childs[i])){
-                        myList.add(childs[i]);
-                        break;
-                    }
-                }
+                FrameDepartment frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
+//                if(frameDepartment != null){
+                	deptName= 1+"";//frameDepartment.getDept_name();
+                	List<String> list = new ArrayList<String>();
+                	for(int i=0; i<childs.length; i++) {
+                		String name = childs[i].split("\\.")[0].split("_")[1];
+                		if(deptName.equals(name)){
+                			list.add(childs[i]);
+                			path = PATH + fileName + File.separator + childs[i];
+                			fileDTO.setFileName(list);
+                			fileDTO.setPath(path);
+                			break;
+                		}
+                	}
+//                }
             }
         }else{
             File f = new File(path);
             String[] childs = f.list();
-            Collections.addAll(myList, childs);
+            fileDTO.setFileName(Arrays.asList(childs));
         }
-        resultMap.put("myList",myList);
-        resultMap.put("filePath",path);
-        return resultMap;
+        return ResultGenerator.genSuccessResult(fileDTO);
     }
 
 }
