@@ -42,11 +42,6 @@ $(function(){
                 success: function (data) {
                     if (data.code == 200) {
 
-                        if(data.data == false){
-
-                        }else{
-
-                        }
                     } else {
                         $('.login .error').show().html(data.message);
                         return false;
