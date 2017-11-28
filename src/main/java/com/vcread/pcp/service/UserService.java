@@ -46,7 +46,7 @@ public class UserService {
 			return ResultGenerator.genFailResult("用户名或密码错误");
 		}
 		
-		if (!password.equals(user.getU_password())) {
+		if (!password.equals(DigestUtils.md5Hex(user.getU_password()))) {
 			return ResultGenerator.genFailResult("用户名或密码错误");
 		}
 		

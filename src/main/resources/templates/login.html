@@ -35,7 +35,7 @@
                 <img id="num" src="" />
                 <span class="shua">刷新验证码</span>
             </p>
-            <p class="error"></p>
+            <h5 th:text="${error}"></h5>
             <p>
                 <input type="button" value="登录" class="btn" />
                 <!--<button class="btn">登录1</button>-->
@@ -43,6 +43,7 @@
             </p>
 
         </form>
+        
         <img class= 'pic' src="images/login.png" alt="" />
     </div>
     <footer> Copyright @ 中电信集团 版权所有</footer>

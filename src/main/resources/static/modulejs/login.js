@@ -7,11 +7,12 @@ $(function(){
         $("#num").attr('src', codeUrl+'?'+Math.random());
     })
     //canshu
-    var user = $('.login input[name="username"]').val().trim(); // 用户名
-    var pwd = $('.login input[name="password"]').val().trim(); // 密码
-    var code = $('.login input[name="captcha"]').val().trim(); // 验证码
+    
     // 点击登录按钮时进行判断
     $('.btn').on('click', function () {
+    	var user = $('.login input[name="username"]').val().trim(); // 用户名
+        var pwd = $('.login input[name="password"]').val().trim(); // 密码
+        var code = $('.login input[name="captcha"]').val().trim(); // 验证码
         if (user == '') {
             $('.login .error').show().html('请输入账号');
             return false;
