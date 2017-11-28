@@ -28,26 +28,26 @@ $(function(){
             $('.login .error').show().html('请输入验证码');
             return false;
         } else {
-            //$('.login form').submit();
-            var password = $.md5(pwd)
-            $.ajax({
-                type: 'POST',
-                url: url_login,
-                dataType: 'json',
-                data: {
-                    'username': user,
-                    'password': password,
-                    'captcha': code
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-
-                    } else {
-                        $('.login .error').show().html(data.message);
-                        return false;
-                    }
-                }
-            })
+            $('.login form').submit();
+//            var password = $.md5(pwd)
+//            $.ajax({
+//                type: 'POST',
+//                url: url_login,
+//                dataType: 'json',
+//                data: {
+//                    'username': user,
+//                    'password': password,
+//                    'captcha': code
+//                },
+//                success: function (data) {
+//                    if (data.code == 200) {
+//
+//                    } else {
+//                        $('.login .error').show().html(data.message);
+//                        return false;
+//                    }
+//                }
+//            })
         }
     })
 })

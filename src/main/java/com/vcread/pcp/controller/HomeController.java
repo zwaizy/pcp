@@ -42,7 +42,7 @@ public class HomeController {
   			return "redirect:/user";
   		} catch (Exception e) {	
   			e.printStackTrace();
-  			return "redirect:/login";
+  			return "login";
   		}
   	}
   	
