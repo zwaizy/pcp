@@ -1,18 +1,21 @@
 package com.vcread.pcp.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.vcread.pcp.configure.WebSecurityConfig;
 import com.vcread.pcp.result.Result;
 import com.vcread.pcp.result.ResultGenerator;
 import com.vcread.pcp.service.UserService;
@@ -45,18 +48,16 @@ public class HomeController {
   		}
   	}
   	
-  	//接收表单，包含用户名和密码
-//  	@RequestMapping(value="/logout",method=RequestMethod.GET)
-//  	@ResponseBody
-//  	public Result logout(HttpServletRequest  request,HttpServletResponse response){
-//  		try {
-//  			Result result = userService.logout(request,response);
-//  			return result;
-//  		} catch (Exception e) {	
-//  			e.printStackTrace();
-//  			return ResultGenerator.genFailResult("登出失败");
-//  		}
-//  	}
+  	@RequestMapping(value = "/time/now",method = RequestMethod.GET)
+    @ResponseBody
+    public Result time(){
+        //时间解析  
+        DateTime dateTime = DateTime.now();
+        
+        String time = dateTime.toString("yyyy年MM月dd日 EE",Locale.CHINESE);  
+        
+        return ResultGenerator.genSuccessResult(time);
+    }
 
     @RequestMapping("/403")
     public String unauthorizedRole(){
