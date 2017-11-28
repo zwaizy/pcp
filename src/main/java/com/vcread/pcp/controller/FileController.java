@@ -2,17 +2,11 @@
  * 2015-2016 龙果学院 (www.roncoo.com)
  */
 package com.vcread.pcp.controller;
-
-<<<<<<< Updated upstream
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-=======
 import com.vcread.pcp.configure.WebSecurityConfig;
 import com.vcread.pcp.entity.FrameDepartment;
 import com.vcread.pcp.entity.UserDept;
@@ -21,11 +15,8 @@ import com.vcread.pcp.result.ResultGenerator;
 import com.vcread.pcp.service.FrameDepartmentService;
 import com.vcread.pcp.service.UserDeptService;
 import com.vcread.pcp.util.zip.ZipUtils;
->>>>>>> Stashed changes
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
-
-import com.vcread.pcp.configure.WebSecurityConfig;
 import com.vcread.pcp.dto.FileDTO;
-import com.vcread.pcp.entity.FrameDepartment;
-import com.vcread.pcp.entity.UserDept;
-import com.vcread.pcp.result.Result;
-import com.vcread.pcp.result.ResultGenerator;
-import com.vcread.pcp.service.FrameDepartmentService;
-import com.vcread.pcp.service.UserDeptService;
-import com.vcread.pcp.util.zip.ZipUtils;
 
 /**
  * spring-boot-demo-12-1
