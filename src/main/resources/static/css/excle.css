@@ -1,0 +1,61 @@
+.content{
+    width:100%;
+    margin:40px auto 150px;
+    position: relative;
+    height:500px;
+    overflow: hidden;
+}
+button{
+    cursor: pointer;
+}
+
+.content ul{
+    margin-top: 10px;
+    width:100%;
+    border: 1px solid #aeacae;
+    overflow: hidden;
+    background-color: #fff;
+    padding:15px;
+}
+.content ul li{
+    box-sizing: border-box;
+    width:25%;
+    float: left;
+    height:60px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.content ul li .pic{
+    float: left;
+    width: 60px;
+    height:60px;
+    margin-right:5px;
+    background: url("../images/excle.png") no-repeat 0 0 ;
+}
+.content ul li .title{
+    height:60px;
+    font-size: 12px;
+    line-height: 12px;
+}
+.bg{
+    background-color: #aeacae
+}
+.fileUpload{
+    display: none;
+    width:50%;
+    overflow: hidden;
+    padding:50px;
+    position: absolute;
+    left:200px;
+    top:70px;
+    z-index: 99;
+    background-color: #f7f7f7
+}
+.fileUpload form{
+    border:1px solid #85a6ea;
+    padding:20px 10px 10px 10px;
+}
+.show{
+    display: block;
+}

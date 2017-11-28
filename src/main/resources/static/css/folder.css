@@ -1,0 +1,41 @@
+.content{
+    width:100%;
+    margin:40px auto 150px;
+}
+button{
+    cursor: pointer;
+}
+
+.content ul{
+    margin-top: 10px;
+    width:100%;
+    border: 1px solid #aeacae;
+    overflow: hidden;
+    background-color: #fff;
+    padding:15px;
+}
+.content ul li{
+    box-sizing: border-box;
+    width:25%;
+    float: left;
+    height:60px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.content ul li .pic{
+    float: left;
+    width: 60px;
+    height:60px;
+    margin-right:5px;
+    background: url("../images/folder.png") no-repeat 0 0 ;
+}
+.content ul li .title{
+    float: left;
+    height:60px;
+    font-size: 16px;
+    line-height: 60px;
+}
+.bg{
+    background-color: #aeacae
+}

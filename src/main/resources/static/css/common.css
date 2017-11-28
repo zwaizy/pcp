@@ -1,0 +1,91 @@
+.bg-y{
+    background-color: #ffd310;
+    width:980px;
+    margin: 50px auto;
+
+}
+header{
+    padding:10px 20px 0px;
+    height: 50px;
+    line-height: 50px;
+}
+header h1{
+    display: block;
+    width:160px;
+    height: 50px;
+    float: left;
+    background: url("../images/logo2.png") ;
+    background-size: cover;
+}
+header span{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+.time{
+    margin-left:15%;
+}
+.help{
+    cursor: pointer;
+    float:right;
+    width:50px;
+    height:50px;
+    background: url("../images/help.png") ;
+    background-size: contain;
+    margin-right:30px;
+}
+.exit{
+    cursor: pointer;
+    width:40px;
+    height:40px;
+    float:right;
+    background: url("../images/exit.png") ;
+    background-size: contain;
+    line-height: 40px;
+    text-align: center;
+    color: #ffd310;
+}
+.father{
+    box-sizing: border-box;
+    margin: 10px auto 10px;
+    padding:10px 15px;
+    width:98%;
+    background: #004ca5;
+    overflow: hidden;
+}
+.nav{
+    box-sizing: border-box;
+    padding-left: 100px;
+    line-height: 40px;
+    color:#fff;
+    height:40px;
+    float:left;
+    cursor: pointer;
+    width:94%;
+    background:#397dbd;
+    box-shadow: 3px 3px  3px  #000;
+}
+.sanjiao{
+    float:left;
+    width: 0px;
+    height: 0px;
+    border-top: 20px solid #397dbd;
+    border-right: 20px solid #397dbd;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid transparent
+}
+footer{
+    width: 100%;
+    height:50px;
+    margin-bottom: 10px;
+}
+footer p{
+    width:400px;
+    height:30px;
+    border-radius: 20px;
+    margin-left :200px;
+    background-color: #004ca5;
+    color:#fff;
+    line-height: 30px;
+    text-align: center;
+}

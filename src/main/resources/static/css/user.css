@@ -1,0 +1,37 @@
+
+.content{
+    width:100%;
+    margin:40px auto 150px;
+}
+.content h2{
+    color:#32ceff;
+    font-size:24px;
+}
+table {
+    width: 100%;
+    line-height: 2em;
+    font-family: Arial;
+    border-collapse: collapse;
+}
+thead tr {
+    color: #fff;
+    background-color: #309bcf;
+    height:40px;
+    border-bottom: 2px solid #004ca5;
+    text-align: center;
+}
+tbody tr {
+    color: #fff;
+    font-size: 0.8em;
+    border-bottom: 1px solid #004ca5;
+    background-color: #3064cf;
+    text-align: center;
+
+}
+th {
+    font-weight: normal;
+    text-align: center;
+}
+th,td {
+    padding: 0 10px;
+}

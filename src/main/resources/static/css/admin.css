@@ -1,0 +1,35 @@
+
+.content{
+    width:80%;
+    margin:40px auto 50px;
+}
+.content h2{
+    color:#32ceff;
+    font-size:24px;
+}
+.content p{
+    color:#fff;
+    box-sizing: border-box;
+    height:30px;
+    line-height: 30px;
+    margin-bottom: 2px;
+    width:100%;
+}
+.content .title{
+    box-sizing: border-box;
+    padding-right:10px;
+    width:30%;
+    height:30px;
+    text-align: right;
+    float: left;
+    background-color: #3064cf
+}
+.content .con{
+    box-sizing: border-box;
+    padding-left:10px;
+    width:70%;
+    height:30px;
+    text-align: left;
+    float: left;
+    background-color: #3083cf
+}
