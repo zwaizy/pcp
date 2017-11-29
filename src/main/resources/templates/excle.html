@@ -24,20 +24,22 @@
             </div>
             <div class="content">
                 <button class="upload">上 传</button>
-                <button>删 除</button>
+                <button id="remove">删 除</button>
                 <button class="download">下 载</button>
                 <button>返 回</button>
                 <ul id="mulu">
 
                 </ul>
                 <div class="fileUpload">
-                    <form enctype="multipart/form-data" method="post" action=''>
+                    <form enctype="multipart/form-data" method="post" action='/file/upload' target="frameFile">
                         <p>上传说明：</p>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;上传的文件为excle文档，如果一次需要上传多个excle文档，那么将这些文件放入.zip为后缀的压缩文件，上传后会解压到相应的目录</p>
                         <p style="color:red">注意事项：压缩文件中必须全部为文件，不允许有目录，否则会出现错误</p>
-                        <input type="file" name="uploadfile"/>
-                        <input type="submit" value="提 交"/>
+                        <input type="file" name="file"/>
+                        <input type="hidden" name="dirName" id="dirName" value="" />
+                        <input type="button" value="提 交" id="btn"/>
                     </form>
+                    <!--<iframe name='frameFile' style='display: none;'></iframe>-->
                     <span class="close">X</span>
                 </div>
             </div>

@@ -8,6 +8,10 @@ $(function(){
     $(".upload").click(function(){
         $(".fileUpload").addClass("show");
     })
+    $(".close").click(function(){
+        $(".fileUpload").removeClass("show");
+    })
+
     //数据回显
     //console.log(localStorage.getItem("name"))
     var excleUrl = "/file/show?fileName="+localStorage.getItem("name")
@@ -32,5 +36,16 @@ $(function(){
                 return false;
             }
         }
+    })
+    //删除
+    $("#remove").on("click",function(){
+        alert(1)
+    });
+    //提交
+    $('#btn').on('click', function () {
+        var data = localStorage.getItem("name")
+        $('.fileUpload input[name="dirName"]').val(data) ;
+        $('.fileUpload form').submit();
+
     })
 })

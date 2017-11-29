@@ -50,8 +50,20 @@ button{
     left:200px;
     top:70px;
     z-index: 99;
-    background-color: #f7f7f7
+    background-color: #f7f7f7;
 }
+.close{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:20px;
+    height:20px;
+    border:1px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
 .fileUpload form{
     border:1px solid #85a6ea;
     padding:20px 10px 10px 10px;

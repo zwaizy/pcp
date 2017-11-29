@@ -72,7 +72,7 @@ public class FileController {
 
 		// 解决中文问题，liunx下中文路径，图片显示问题
 //		fileName = UUID.randomUUID() + suffixName;
-		File dest = new File(filePath + dirName + fileName);
+		File dest = new File(filePath + dirName + File.separator + fileName);
 
 		// 检测是否存在目录
 		if (!dest.getParentFile().exists()) {
@@ -85,7 +85,7 @@ public class FileController {
 				ZipUtils.unzip(filePath + fileName,filePath);
 				dest.deleteOnExit();
 			}
-			return "上传成功";
+			return "redirect: /show";
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
