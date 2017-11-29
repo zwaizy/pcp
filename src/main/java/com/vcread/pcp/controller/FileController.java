@@ -54,9 +54,10 @@ public class FileController {
     @Autowired
     private FrameDepartmentService frameDepartmentService;
 	@RequestMapping(value = "upload")
-	public String upload(@RequestParam("file") MultipartFile file,String dirName) {
+	@ResponseBody
+	public Result upload(@RequestParam("file") MultipartFile file,String dirName) {
 		if (file.isEmpty()) {
-			return "文件不能为空";
+			return ResultGenerator.genFailResult("文件不存在！");
 		}
 
 		// 获取文件名
@@ -82,17 +83,17 @@ public class FileController {
 		try {
 			file.transferTo(dest);
 			if (suffixName.equals(SUFFIEX)) {
-				ZipUtils.unzip(filePath + fileName,filePath);
+				ZipUtils.unzip(filePath + dirName + File.separator + fileName,filePath + dirName + File.separator );
 				dest.deleteOnExit();
 			}
-			return "redirect: /show";
+			return ResultGenerator.genSuccessResult();
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return "上传失败";
+		return ResultGenerator.genFailResult("上传失败！");
 	}
 
 
