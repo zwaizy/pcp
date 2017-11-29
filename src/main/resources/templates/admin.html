@@ -20,7 +20,16 @@
         <div class="father">
             <div style="height:40px;">
                 <div class="sanjiao"></div>
-                <div class="nav">统计下载</div>
+                <div class="nav">
+                    <ul class="m-nav">
+                        <li class="g-fl ui-menu">
+                            <a >统计下载</a>
+                            <ul class="ui-menu-cont">
+                                <li><a id="sp">sp账单</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="content">
                 <h2>服务提供商资料</h2>
@@ -37,38 +46,7 @@
                             <th>CDMA手机号</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="radio" name="radio" value="1"/></td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="radio" value="2"/></td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="radio" value="3"/></td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                            <td>Row</td>
-                            <td>the</td>
-                            <td>First</td>
-                        </tr>
-
+                    <tbody id="detail">
                     </tbody>
                 </table>
             </div>
@@ -79,4 +57,6 @@
     </div>
 
 </body>
+<script src="modulejs/jquery-2.1.4.js"></script>
+<script src="modulejs/admin.js"></script>
 </html>
