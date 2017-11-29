@@ -54,7 +54,7 @@ public class FramDepartmentController {
 			return ResultGenerator.genSuccessResult(framList);
 		}else{
 			UserDept userDept=userDeptService.getUserDept(userName);
-			FrameDepartment frameDepartment = frameDepartmentService.getFrameDepartment(userDept.getUser_code(),userDept.getFram_code());
+			FrameDepartment frameDepartment = frameDepartmentService.getFrameDepartment(userDept.getFram_seq(),userDept.getFram_code());
 			List<FrameDepartment> framList = new ArrayList<FrameDepartment>();
 			if(frameDepartment != null){
 				frameDepartment.setUser_name(userName);
