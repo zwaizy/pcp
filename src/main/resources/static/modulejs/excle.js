@@ -52,4 +52,9 @@ $(function(){
             }
         } });
     })
+    //返回
+    $("#back").click(function(){
+        window.history.back()
+    })
+
 })
