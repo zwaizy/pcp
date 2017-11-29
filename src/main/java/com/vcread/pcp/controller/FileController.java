@@ -122,8 +122,8 @@ public class FileController {
                 String dept_code=userDept.getUser_code().toString();
                 String fram_code=userDept.getFram_code().toString();
                 FrameDepartment frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
-//                if(frameDepartment != null){
-                	deptName= 1+"";//frameDepartment.getDept_name();
+                if(frameDepartment != null){
+                	deptName= frameDepartment.getDept_name();
                 	List<String> list = new ArrayList<String>();
                 	for(int i=0; i<childs.length; i++) {
                 		String name = childs[i].split("\\.")[0].split("_")[1];
@@ -135,7 +135,7 @@ public class FileController {
                 			break;
                 		}
                 	}
-//                }
+                }
             }
         }else{
             File f = new File(path);
