@@ -112,3 +112,9 @@ footer{
     color: red;
     text-align: center;
 }
+.login form h5{
+    width:100%;
+    color: red;
+    text-align: center;
+    overflow: hidden;
+}

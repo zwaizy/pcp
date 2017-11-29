@@ -20,7 +20,7 @@
     </header>
     <div class="click">单点登录</div>
     <div class="login">
-        <form method="post" action="/loginPost">
+        <form method="post" action="/loginPost" >
             <p>
                 <span>用户名 ：</span>
                 <input  name = "username" type="text" value="" placeholder="请输入用户名"/>
@@ -35,7 +35,8 @@
                 <img id="num" src="" />
                 <span class="shua">刷新验证码</span>
             </p>
-            <h5 th:text="${error}"></h5>
+            <h5  th:text="${error}"></h5>
+            <p class="error"></p>
             <p>
                 <input type="button" value="登录" class="btn" />
                 <!--<button class="btn">登录1</button>-->
@@ -43,7 +44,7 @@
             </p>
 
         </form>
-        
+        <iframe name='frameFile' style='display: none;'></iframe>
         <img class= 'pic' src="images/login.png" alt="" />
     </div>
     <footer> Copyright @ 中电信集团 版权所有</footer>
