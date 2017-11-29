@@ -56,6 +56,11 @@ public class WebController {
 		return "folder"; // 开头不要加上/，linux下面会出错
 	}
 
+	@RequestMapping(value = "/excle")
+	public String toExcel() {
+		return "excle"; // 开头不要加上/，linux下面会出错
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		// 移除session
