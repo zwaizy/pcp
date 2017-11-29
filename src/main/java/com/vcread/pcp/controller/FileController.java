@@ -132,7 +132,7 @@ public class FileController {
                 			list.add(childs[i]);
                 			path = PATH + fileName + File.separator + childs[i];
                 			fileDTO.setFileName(list);
-                			fileDTO.setPath(path);
+                			//fileDTO.setPath(path);
                 			break;
                 		}
                 	}
@@ -143,7 +143,8 @@ public class FileController {
             String[] childs = f.list();
             fileDTO.setFileName(Arrays.asList(childs));
         }
-        return ResultGenerator.genSuccessResult(fileDTO);
+		fileDTO.setPath(excelsPath);
+		return ResultGenerator.genSuccessResult(fileDTO);
     }
 
     /**
