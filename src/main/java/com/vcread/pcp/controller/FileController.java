@@ -54,7 +54,7 @@ public class FileController {
     @Autowired
     private FrameDepartmentService frameDepartmentService;
 	@RequestMapping(value = "upload")
-	public String upload(@RequestParam("file") MultipartFile file) {
+	public String upload(@RequestParam("file") MultipartFile file,String dirName) {
 		if (file.isEmpty()) {
 			return "文件不能为空";
 		}
@@ -72,7 +72,7 @@ public class FileController {
 
 		// 解决中文问题，liunx下中文路径，图片显示问题
 //		fileName = UUID.randomUUID() + suffixName;
-		File dest = new File(filePath + fileName);
+		File dest = new File(filePath + dirName + fileName);
 
 		// 检测是否存在目录
 		if (!dest.getParentFile().exists()) {
@@ -85,7 +85,7 @@ public class FileController {
 				ZipUtils.unzip(filePath + fileName,filePath);
 				dest.deleteOnExit();
 			}
-			return "redirect:/upload/show";
+			return "上传成功";
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
