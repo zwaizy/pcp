@@ -3,20 +3,15 @@
  */
 package com.vcread.pcp.controller;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.vcread.pcp.configure.WebSecurityConfig;
-import com.vcread.pcp.entity.FrameDepartment;
-import com.vcread.pcp.entity.UserDept;
-import com.vcread.pcp.result.Result;
-import com.vcread.pcp.result.ResultGenerator;
-import com.vcread.pcp.service.FrameDepartmentService;
-import com.vcread.pcp.service.UserDeptService;
-import com.vcread.pcp.util.zip.ZipUtils;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
+
+import com.vcread.pcp.configure.WebSecurityConfig;
 import com.vcread.pcp.dto.FileDTO;
+import com.vcread.pcp.entity.FrameDepartment;
+import com.vcread.pcp.entity.UserDept;
+import com.vcread.pcp.result.Result;
+import com.vcread.pcp.result.ResultGenerator;
+import com.vcread.pcp.service.FrameDepartmentService;
+import com.vcread.pcp.service.UserDeptService;
+import com.vcread.pcp.util.zip.ZipUtils;
 
 /**
  * spring-boot-demo-12-1
@@ -82,9 +86,9 @@ public class FileController {
 
 		try {
 			file.transferTo(dest);
-			if (suffixName.equals(SUFFIEX)) {
+			if (suffixName.equalsIgnoreCase(SUFFIEX)) {
 				ZipUtils.unzip(filePath + dirName + File.separator + fileName,filePath + dirName + File.separator );
-				dest.deleteOnExit();
+//				ZipUtils.deleteFile(filePath + dirName + File.separator + fileName);
 			}
 			return ResultGenerator.genSuccessResult();
 		} catch (IllegalStateException e) {
@@ -115,12 +119,18 @@ public class FileController {
         if(!StringUtils.isEmpty(fileName)){
             path=path+fileName;
             File f = new File(path);
-            String[] childs = f.list();
+            String[] childs = f.list(new FilenameFilter() {
+				
+				@Override
+				public boolean accept(File dir, String name) {
+					return !name.endsWith(".ZIP") && !name.endsWith(".zip");
+				}
+			});
             if(role){
             	fileDTO.setFileName(Arrays.asList(childs));
             }else{
                 UserDept userDept=userDeptService.getUserDept(userName);
-                String dept_code=userDept.getUser_code().toString();
+                String dept_code=userDept.getFram_seq().toString();
                 String fram_code=userDept.getFram_code().toString();
                 FrameDepartment frameDepartment=frameDepartmentService.getFrameDepartment(dept_code,fram_code);
                 if(frameDepartment != null){

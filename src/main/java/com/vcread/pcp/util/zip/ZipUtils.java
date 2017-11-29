@@ -85,7 +85,7 @@ public class ZipUtils {
 		return list;  
     }  
 	//删除文件
-	private static void deleteFile(String Path) {
+	public static void deleteFile(String Path) {
 		// TODO Auto-generated method stub
 		File file = new File(Path);  
 	    // 路径为文件且不为空则进行删除  
@@ -94,13 +94,13 @@ public class ZipUtils {
 	    }  
 	}
 	public static void main(String args[]) throws Exception {
-		ZipUtils.unzip("D:\\MESSAGE.zip", "D:\\");
+//		ZipUtils.unzip("D:\\MESSAGE.zip", "D:\\");
 
 //		List<String> list = readZipFile("D:\\MESSAGE.zip");
 //		for (int i = 0; i < list.size(); i++) {
 //			System.err.println(list.get(i));
 //		}
-//		ZipUtils.deleteFile("D:\\MESSAGE.zip");
+		ZipUtils.deleteFile("D:\\MESSAGE.ZIP");
 	}
 }
 
