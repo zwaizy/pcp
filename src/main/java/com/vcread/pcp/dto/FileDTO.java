@@ -6,7 +6,18 @@ public class FileDTO {
 	
 	private String path;
 	
+	private boolean flag;
+	
 	private List<String> fileName;
+
+	
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
 
 	public String getPath() {
 		return path;

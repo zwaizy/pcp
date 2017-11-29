@@ -110,6 +110,7 @@ public class FileController {
         String userName=request.getSession().getAttribute(WebSecurityConfig.SESSION_KEY).toString();
         String deptName="";
         FileDTO fileDTO = new FileDTO();
+        fileDTO.setFlag(role);
         String path = excelsPath;
         if(!StringUtils.isEmpty(fileName)){
             path=path+fileName;
