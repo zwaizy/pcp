@@ -70,16 +70,4 @@ $(function(){
     },function() {
         $(this).children("ul").stop(true, true).slideUp("fast");
     });
-    $("#sp").click(function () {
-        console.log(1)
-        $.ajax({
-            type: 'GET',
-            url: spUrl,
-            dataType: 'json',
-            data: '',
-            success: function (data) {
-
-            }
-        })
-    })
 })

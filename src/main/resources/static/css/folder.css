@@ -39,3 +39,24 @@ button{
 .bg{
     background-color: #aeacae
 }
+#ex{
+    cursor: pointer;
+    background: #eaeaea;
+    padding: 1px 6px;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 13.3333px Arial;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+    display: none;
+}

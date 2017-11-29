@@ -4,6 +4,7 @@ $(function(){
         var title = $(this).find(".title").text();
         console.log(title)
     })
+    console.log(localStorage.getItem("name"))
     $(".upload").click(function(){
         $(".fileUpload").addClass("show");
     })
