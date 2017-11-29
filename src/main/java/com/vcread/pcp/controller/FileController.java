@@ -54,10 +54,9 @@ public class FileController {
     @Autowired
     private FrameDepartmentService frameDepartmentService;
 	@RequestMapping(value = "upload")
-	@ResponseBody
-	public Result upload(@RequestParam("file") MultipartFile file) {
+	public String upload(@RequestParam("file") MultipartFile file) {
 		if (file.isEmpty()) {
-			return ResultGenerator.genFailResult("文件为空");
+			return "文件不能为空";
 		}
 
 		// 获取文件名
@@ -86,14 +85,14 @@ public class FileController {
 				ZipUtils.unzip(filePath + fileName,filePath);
 				dest.deleteOnExit();
 			}
-			return ResultGenerator.genSuccessResult();
+			return "redirect:/upload/show";
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return ResultGenerator.genFailResult("上传失败");
+		return "上传失败";
 	}
 
 
