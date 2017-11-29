@@ -4,7 +4,7 @@ $(function(){
         type: 'GET',
         url: userUrl,
         dataType: 'json',
-        data: {},
+        data: '',
         success: function (data) {
             if (data.code == 200) {
                 console.log(data)
