@@ -35,7 +35,7 @@ public class FramDepartmentController {
 	@Autowired
 	private UserDeptService userDeptService;
 
-	@RequestMapping(value = "/get")
+	@RequestMapping(value = "/get",produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public Result get(HttpServletRequest request) {
 		boolean role= (boolean) request.getSession().getAttribute(WebSecurityConfig.SESSION_ROLE);

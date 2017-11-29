@@ -50,6 +50,11 @@ public class WebController {
 	public String login() {
 		return "login"; // 开头不要加上/，linux下面会出错
 	}
+	
+	@RequestMapping(value = "/folder")
+	public String toFolder() {
+		return "folder"; // 开头不要加上/，linux下面会出错
+	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
