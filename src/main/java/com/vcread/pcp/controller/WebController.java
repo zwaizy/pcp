@@ -60,6 +60,11 @@ public class WebController {
 	public String toExcel() {
 		return "excle"; // 开头不要加上/，linux下面会出错
 	}
+
+	@RequestMapping(value = "/excle_sp")
+	public String toExcelSP() {
+		return "excle_sp"; // 开头不要加上/，linux下面会出错
+	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
