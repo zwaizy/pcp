@@ -13,6 +13,7 @@ $(function(){
     	var user = $('.login input[name="username"]').val().trim(); // 用户名
         var pwd = $('.login input[name="password"]').val().trim(); // 密码
         var code = $('.login input[name="captcha"]').val().trim(); // 验证码
+        console.log(1)
         if (user == '') {
             $('.login .error').show().html('请输入账号');
             return false;
