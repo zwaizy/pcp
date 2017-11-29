@@ -45,7 +45,11 @@ $(function(){
     $('#btn').on('click', function () {
         var data = localStorage.getItem("name")
         $('.fileUpload input[name="dirName"]').val(data) ;
-        $('.fileUpload form').submit();
-
+        $('.fileUpload form').ajaxSubmit({ success:function(data){
+            //console.log(arguments);
+            if(data.message == "SUCCESS"){
+                window.location.reload();
+            }
+        } });
     })
 })
