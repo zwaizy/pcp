@@ -30,6 +30,19 @@ $(function(){
         $("#oldex").hide();
         //console.log(title)
     })
+    $("#mulu ").on("dblclick","li",function(){
+        $(this).addClass("bg").siblings().removeClass("bg");
+        var title = $(this).find(".title").text();
+        localStorage.setItem("name",title);
+        //console.log(flag)
+        if(!flag){
+            var exUrl = "/excle_sp"
+        }else{
+            var exUrl = "/excle"
+        }
+        $("#ex").attr("href",exUrl);
+        $("#ex")[0].click();
+    })
     var fileUrl = "/file/show" ;
     //数据回显
     $.ajax({
