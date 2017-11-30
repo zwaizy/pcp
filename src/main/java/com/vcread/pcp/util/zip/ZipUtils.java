@@ -94,15 +94,15 @@ public class ZipUtils {
 	        file.delete();  
 	    }  
 	}
-	public static void main(String args[]) throws Exception {
+//	public static void main(String args[]) throws Exception {
 //		ZipUtils.unzip("D:\\MESSAGE.zip", "D:\\");
 
 //		List<String> list = readZipFile("D:\\MESSAGE.zip");
 //		for (int i = 0; i < list.size(); i++) {
 //			System.err.println(list.get(i));
 //		}
-		ZipUtils.deleteFile("D:\\MESSAGE.ZIP");
-	}
+//		ZipUtils.deleteFile("D:\\MESSAGE.ZIP");
+//	}
 }
 
 /**

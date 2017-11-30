@@ -171,9 +171,9 @@ public class FileController {
      */
     @RequestMapping(value = "delFile")
     @ResponseBody
-    public Result delFile(String path, String fileName) {
+    public Result delFile(String dirName, String fileName) {
         // 文件路径
-        File targetFile = new File(path, fileName);
+        File targetFile = new File(excelsPath + dirName + File.separator + fileName);
         if (targetFile.exists()) {
 	        boolean bool=targetFile.delete();
 	        if(bool){
