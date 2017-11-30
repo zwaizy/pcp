@@ -3,14 +3,19 @@
  */
 package com.vcread.pcp.controller;
 import java.io.File;
-import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,10 +111,11 @@ public class FileController {
      * @param fileName
      * @param request
      * @return
+     * @throws UnsupportedEncodingException 
      */
     @RequestMapping(value = "show")
     @ResponseBody
-    public Result show (String fileName,HttpServletRequest request){
+    public Result show (String fileName,HttpServletRequest request) throws Exception{
         boolean role = (boolean) request.getSession().getAttribute(WebSecurityConfig.SESSION_ROLE);
         String userName=request.getSession().getAttribute(WebSecurityConfig.SESSION_KEY).toString();
         String deptName="";
@@ -177,5 +183,33 @@ public class FileController {
 	        }
         }
         return  ResultGenerator.genFailResult("文件不存在！");
+    }
+    
+    @RequestMapping(value = "downloadFile")
+    public void downloadLocal(HttpServletResponse response,HttpServletRequest request,String fileName) throws Exception {
+    	//获得请求文件名  
+        System.out.println(fileName);  
+          
+        //设置文件MIME类型  
+        response.setContentType(request.getServletContext().getMimeType(fileName));  
+        //设置Content-Disposition  
+        response.setHeader("Content-Disposition", "attachment;filename="+fileName);  
+        //读取目标文件，通过response将目标文件写到客户端  
+        //获取目标文件的绝对路径  
+//        String fullFileName = request.getServletContext().getRealPath("/download/" + fileName);  
+        //System.out.println(fullFileName);  
+        //读取文件  
+        InputStream in = new FileInputStream(excelsPath+fileName);  
+        OutputStream out = response.getOutputStream();  
+          
+        //写文件  
+        int b;  
+        while((b=in.read())!= -1)  
+        {  
+            out.write(b);  
+        }  
+        
+        in.close();  
+        out.close();  
     }
 }

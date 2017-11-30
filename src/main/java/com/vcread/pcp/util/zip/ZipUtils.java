@@ -3,6 +3,7 @@ package com.vcread.pcp.util.zip;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -38,7 +39,7 @@ public class ZipUtils {
 				outputFile.mkdir();
 			}
 		}
-		ZipFile zipFile = new ZipFile(string);
+		ZipFile zipFile = new ZipFile(string,Charset.forName("GBK"));
 		Enumeration<ZipEntry> enu = (Enumeration<ZipEntry>) zipFile.entries();
 		while (enu.hasMoreElements()) {
 			ZipEntry entry = (ZipEntry) enu.nextElement();
@@ -145,7 +146,7 @@ class MultiThreadEntry implements Runnable {
 			throws IOException {
 		byte[] data = new byte[BUFFER_SIZE];
 		String entryName = zipEntry.getName();
-		entryName = new String(entryName.getBytes("GBK"));
+		entryName = new String(entryName.getBytes("GBK"),"GBK");
 		FileOutputStream fos = new FileOutputStream(outputDirectory
 				+ File.separator + entryName);
 		if (zipEntry.isDirectory()) {
