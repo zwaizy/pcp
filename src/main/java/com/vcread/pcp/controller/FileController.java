@@ -146,7 +146,7 @@ public class FileController {
                 		String name = childs[i].split("\\.")[0].split("_")[1];
                 		if(deptName.equals(name)){
                 			list.add(childs[i]);
-                			path = PATH + fileName + File.separator + childs[i];
+//                			path = PATH + fileName + File.separator + childs[i];
                 			fileDTO.setFileName(list);
                 			//fileDTO.setPath(path);
                 			break;
