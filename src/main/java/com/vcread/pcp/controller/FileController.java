@@ -143,14 +143,18 @@ public class FileController {
                 	deptName= frameDepartment.getDept_name();
                 	List<String> list = new ArrayList<String>();
                 	for(int i=0; i<childs.length; i++) {
-                		String name = childs[i].split("\\.")[0].split("_")[1];
-                		if(deptName.equals(name)){
-                			list.add(childs[i]);
-//                			path = PATH + fileName + File.separator + childs[i];
-                			fileDTO.setFileName(list);
-                			//fileDTO.setPath(path);
-                			break;
-                		}
+                		try {
+                			String name = childs[i].split("\\.")[0].split("_")[1];
+                			if(deptName.equals(name)){
+                				list.add(childs[i]);
+//                				path = PATH + fileName + File.separator + childs[i];
+                				fileDTO.setFileName(list);
+                				//fileDTO.setPath(path);
+                				break;
+                			}
+						} catch (Exception e) {
+							logger.error("fileName is illeagele,file = " + childs[i]);
+						}
                 	}
                 }
             }
