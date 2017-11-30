@@ -186,7 +186,7 @@ public class FileController {
     }
     
     @RequestMapping(value = "downloadFile")
-    public void downloadLocal(HttpServletResponse response,HttpServletRequest request,String fileName) throws Exception {
+    public void downloadLocal(HttpServletResponse response,HttpServletRequest request,String dirName,String fileName) throws Exception {
     	//获得请求文件名  
         System.out.println(fileName);  
           
@@ -199,7 +199,7 @@ public class FileController {
 //        String fullFileName = request.getServletContext().getRealPath("/download/" + fileName);  
         //System.out.println(fullFileName);  
         //读取文件  
-        InputStream in = new FileInputStream(excelsPath+fileName);  
+        InputStream in = new FileInputStream(excelsPath+dirName+File.separator+fileName);  
         OutputStream out = response.getOutputStream();  
           
         //写文件  
