@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -143,14 +144,18 @@ public class FileController {
                 	deptName= frameDepartment.getDept_name();
                 	List<String> list = new ArrayList<String>();
                 	for(int i=0; i<childs.length; i++) {
-                		String name = childs[i].split("\\.")[0].split("_")[1];
-                		if(deptName.equals(name)){
-                			list.add(childs[i]);
-//                			path = PATH + fileName + File.separator + childs[i];
-                			fileDTO.setFileName(list);
-                			//fileDTO.setPath(path);
-                			break;
-                		}
+                		try {
+                			String name = childs[i].split("\\.")[0].split("_")[1];
+                			if(deptName.equals(name)){
+                				list.add(childs[i]);
+//                				path = PATH + fileName + File.separator + childs[i];
+                				fileDTO.setFileName(list);
+                				//fileDTO.setPath(path);
+                				break;
+                			}
+						} catch (Exception e) {
+							logger.error("fileName is illeagele,file = " + childs[i]);
+						}
                 	}
                 }
             }
@@ -188,18 +193,26 @@ public class FileController {
     @RequestMapping(value = "downloadFile")
     public void downloadLocal(HttpServletResponse response,HttpServletRequest request,String dirName,String fileName) throws Exception {
     	//获得请求文件名  
-        System.out.println(fileName);  
-          
+    	response.setCharacterEncoding("UTF-8");
         //设置文件MIME类型  
-        response.setContentType(request.getServletContext().getMimeType(fileName));  
-        //设置Content-Disposition  
-        response.setHeader("Content-Disposition", "attachment;filename="+fileName);  
+        response.setContentType("application/x-download");
+        InputStream in = new FileInputStream(excelsPath+dirName+File.separator+fileName);  
+        /*
+         * 解决各浏览器的中文乱码问题
+         */
+        String userAgent = request.getHeader("User-Agent");
+        byte[] bytes = userAgent.contains("MSIE") ? fileName.getBytes()
+                : fileName.getBytes("UTF-8"); // fileName.getBytes("UTF-8")处理safari的乱码问题
+        fileName = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码
+        response.setHeader("Content-disposition",
+                String.format("attachment; filename=\"%s\"", fileName));
+        
+//        response.setHeader("Content-Disposition", "attachment;filename="+fileName);  
         //读取目标文件，通过response将目标文件写到客户端  
         //获取目标文件的绝对路径  
 //        String fullFileName = request.getServletContext().getRealPath("/download/" + fileName);  
         //System.out.println(fullFileName);  
         //读取文件  
-        InputStream in = new FileInputStream(excelsPath+dirName+File.separator+fileName);  
         OutputStream out = response.getOutputStream();  
           
         //写文件  
