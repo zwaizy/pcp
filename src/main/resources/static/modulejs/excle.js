@@ -1,8 +1,10 @@
 $(function(){
+    var title = "";
     $("#mulu").on("click","li",function(){
         $(this).addClass("bg").siblings().removeClass("bg");
-        var title = $(this).find(".title").text();
-        console.log(title)
+        title = $(this).find(".title").text();
+        var data = localStorage.getItem("name");
+        $(".download").attr("href","/file/downloadFile?dirName="+data+"&fileName="+title)
     })
 
     $(".upload").click(function(){
@@ -11,7 +13,21 @@ $(function(){
     $(".close").click(function(){
         $(".fileUpload").removeClass("show");
     })
-
+    var timeUrl = "/time/now";
+    //时间回显
+    $.ajax({
+        type: 'GET',
+        url: timeUrl,
+        dataType: 'json',
+        data: '',
+        success: function (data) {
+            if (data.code == 200) {
+                $(".time").html(data.data)
+            } else {
+                return false;
+            }
+        }
+    })
     //数据回显
     //console.log(localStorage.getItem("name"))
     var excleUrl = "/file/show?fileName="+localStorage.getItem("name")
@@ -56,5 +72,16 @@ $(function(){
     $("#back").click(function(){
         window.history.back()
     })
-
+    // 删除
+    $(".removebth").click(function(){
+        var data = localStorage.getItem("name")
+        $('.remove input[name="dirName"]').val(data) ;
+        $('.remove input[name="fileName"]').val(title) ;
+        $('.remove ').ajaxSubmit({ success:function(data){
+            console.log(arguments);
+            if(data.message == "SUCCESS"){
+                window.location.reload();
+            }
+        } });
+    })
 })

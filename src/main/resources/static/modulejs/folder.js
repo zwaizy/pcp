@@ -1,11 +1,26 @@
 $(function(){
     var spExcle = "/file/show?fileName="
     var flag = ""
+    var timeUrl = "/time/now";
+    //时间回显
+    $.ajax({
+        type: 'GET',
+        url: timeUrl,
+        dataType: 'json',
+        data: '',
+        success: function (data) {
+            if (data.code == 200) {
+                $(".time").html(data.data)
+            } else {
+                return false;
+            }
+        }
+    })
     $("#mulu ").on("click","li",function(){
         $(this).addClass("bg").siblings().removeClass("bg");
         var title = $(this).find(".title").text();
         localStorage.setItem("name",title);
-        console.log(flag)
+        //console.log(flag)
         if(!flag){
             var exUrl = "/excle_sp"
         }else{
@@ -13,7 +28,7 @@ $(function(){
         }
         $("#ex").show().attr("href",exUrl);
         $("#oldex").hide();
-        console.log(title)
+        //console.log(title)
     })
     var fileUrl = "/file/show" ;
     //数据回显

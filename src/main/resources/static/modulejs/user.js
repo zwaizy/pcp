@@ -1,6 +1,21 @@
 $(function(){
     var userUrl = "/frameDepartment/get";
     var spUrl = "/folder"
+    var timeUrl = "/time/now";
+    //时间回显
+    $.ajax({
+        type: 'GET',
+        url: timeUrl,
+        dataType: 'json',
+        data: '',
+        success: function (data) {
+            if (data.code == 200) {
+                $(".time").html(data.data)
+            } else {
+                return false;
+            }
+        }
+    })
     $.ajax({
         type: 'GET',
         url: userUrl,

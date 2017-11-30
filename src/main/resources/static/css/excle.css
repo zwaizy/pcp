@@ -71,3 +71,19 @@ button{
 .show{
     display: block;
 }
+.download{
+    padding: 1px 6px;
+    cursor: pointer;
+    border:1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    color: #000000;
+}
+.remove{
+    display: inline-block;
+}
+.remove .removebth{
+    padding: 1px 6px;
+    cursor: pointer;
+}
