@@ -15,7 +15,7 @@
 				<pattern>${PATTERN}</pattern>
 			</encoder>
 		</appender>
-		
+		<!-- 指定该包下的打印级别 -->
 		<logger name="com.vcread.pcp" level="debug"/>
 
 		<root level="info">
